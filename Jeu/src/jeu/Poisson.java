@@ -63,10 +63,11 @@ public class Poisson {
         this.Score = Score;
     }
     
-    public static int rand(int min, int max) {
+    public static int rand(int min, int max) { //méthode de randomize
         return min + (int) (Math.random() * ((max - min) + 1));
     }
-    public void unDeplacementAleatoire(){
+    
+    public void unDeplacementAleatoire(){ //methode pour le déplacement aléatoire des poissons
         int x = rand(-1,1);
         int y = rand(-1,1);
         setCoordX(this.getCoordX()+x);

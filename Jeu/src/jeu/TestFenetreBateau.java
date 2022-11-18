@@ -30,7 +30,7 @@ public class TestFenetreBateau extends JFrame implements KeyListener{
         // NOP
     }
     @Override
-    public void keyPressed(KeyEvent event){
+    public void keyPressed(KeyEvent event){ //méthode pour récuperer les touches pour le déplacement du bateau
         if(event.getKeyCode() == event.VK_RIGHT){
             bateau.setCoordX(bateau.getCoordX()+0.01);
             System.out.println("Right");
@@ -55,7 +55,7 @@ public class TestFenetreBateau extends JFrame implements KeyListener{
         // NOP
         }
     
-    public boolean laVictoire(){
+    public boolean laVictoire(){ 
         boolean vic = false;
         if(bateau.getScore() >= 100){
             vic = true;

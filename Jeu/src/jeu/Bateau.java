@@ -184,7 +184,5 @@ public class Bateau {
     public String toString() {
         return "Bateau{" + "nom=" + nom + ", CoordX=" + CoordX + ", CoordY=" + CoordY + ", PointDeVie=" + PointDeVie + ", Score=" + Score + '}';
     }
-    public void test(){
-        
-    }
+    
 }
