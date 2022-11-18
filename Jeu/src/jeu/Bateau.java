@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author brizand
+ * @author brizand commentaire
  */
 public class Bateau {
 
