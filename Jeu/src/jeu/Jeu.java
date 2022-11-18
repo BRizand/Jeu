@@ -15,7 +15,7 @@ public class Jeu {
      
     public Jeu() {        
         this.carte = new Carte();
-        this.carte.ConsDecor("mer.txt");
+        this.carte.ConsDecor("mer.csv");
     }
 
     public Carte getCarte() {

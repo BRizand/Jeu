@@ -71,7 +71,7 @@ public class FenetreDeJeu extends JFrame implements KeyListener, ActionListener{
     public void DemarerPartie(){
         this.remove(menu);
         this.jLabel1 = new JLabel();
-        this.jLabel1.setPreferredSize(new java.awt.Dimension(1000, 1000));
+        this.jLabel1.setPreferredSize(new java.awt.Dimension(2000, 1000));
         this.setContentPane(this.jLabel1);
         this.pack();
 

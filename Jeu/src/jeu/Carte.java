@@ -21,10 +21,12 @@ import javax.imageio.ImageIO;
  */
 public class Carte {
 
-    private int largeur = 25;
-    private int hauteur = 25;
+    private int largeur = 300;
+    private int hauteur = 300;
     private int tailleTuileLargeur=32;
-    private int tailleTuileHauteur =32;    
+    private int tailleTuileHauteur =32;
+    private int nbTuileLargeur =21;
+    private int nbTuileHauteur =23;    
     private BufferedImage[] uneTuile;
     private int[][] decor={};
     
@@ -33,10 +35,11 @@ public class Carte {
         try {
             
             BufferedImage tileset = ImageIO.read(getClass().getResource("tileset.png"));
-            uneTuile =  new BufferedImage[784];
+            uneTuile =  new BufferedImage[nbTuileLargeur*nbTuileHauteur];
             for ( int i = 0; i < uneTuile . length ; i ++) {
-                int x = (i % 28) * tailleTuileLargeur ;
-                int y = (i / 28) * tailleTuileHauteur ;
+                int x = (i % nbTuileLargeur) * tailleTuileLargeur ;
+                int y = (i / nbTuileLargeur) * tailleTuileHauteur ;
+               // System.out.println(x+" "+y);
                 uneTuile [i] = tileset . getSubimage (x , y , tailleTuileLargeur , tailleTuileHauteur );
             }
         } catch (IOException ex) {
@@ -74,7 +77,7 @@ public class Carte {
             fichier.readLine();
             fichier.readLine();
             String info= fichier.readLine();
-            String infoCarte[]= info.split(" ");
+            String infoCarte[]= info.split(",");
             largeur = Integer.parseInt(infoCarte[0]);
             hauteur = Integer.parseInt(infoCarte[1]);
             tailleTuileLargeur = Integer.parseInt(infoCarte[2]);
@@ -82,7 +85,7 @@ public class Carte {
             decor = new int[hauteur][largeur];
             for (int i=0 ; i<hauteur ; i++){
                 String ligne = fichier.readLine();
-                    String infoCase[] = ligne.split(" ");
+                    String infoCase[] = ligne.split(",");
                 for (int j=0 ; j<largeur ; j++){
                     decor[i][j] = Integer.parseInt(infoCase[j]);
                 }
