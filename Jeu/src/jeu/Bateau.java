@@ -11,6 +11,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -31,8 +36,9 @@ public class Bateau {
     private int Score;
     private boolean gauche, droite, haut, bas;
     private Carte carte;
+    private Connection connexion;
     private ArrayList<Integer> EAU;
-
+    
     public Bateau(String nom, double CoordX, double CoordY, int PointDeVie, int Score) {
         this();
         this.nom = nom;
@@ -46,6 +52,10 @@ public class Bateau {
             Logger.getLogger(Bateau.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void setConnexion(Connection connexion) {
+        this.connexion = connexion;
     }
 
     public void setCarte(Carte carte) {
@@ -104,6 +114,8 @@ public class Bateau {
         return bas;
     }
 
+    
+
     public void miseAJour() {
         if (this.PointDeVie > 0) {
             if (this.gauche) {
@@ -145,7 +157,22 @@ public class Bateau {
         } else {
             return;
         }
+        try {
+            
+            PreparedStatement requete = connexion.prepareStatement("UPDATE Bateau SET CoordX=?,CoordY=?,PointDeVie=? WHERE Pseudo=?");
+            requete.setDouble(1, this.CoordX);
+            requete.setDouble(2, this.CoordY);
+            requete.setInt(3, this.PointDeVie);
+            requete.setString(4, this.nom);
+            System.out.println(requete);
+            int nbModif = requete.executeUpdate();
+            System.out.println(nbModif + " mdif enregistrés");
 
+            requete.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return;
     }
 
     public void rendu(Graphics2D contexteBuffer) {
