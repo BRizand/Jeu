@@ -134,7 +134,7 @@ public class Bateau {
                 CoordY = 0;
                 this.haut = false;
             }
-            if (this.carte.getDecor((int) Math.round((CoordY / this.carte.getTailleTuileLargeur())), (int) Math.round((CoordX / this.carte.getTailleTuileHauteur()))) != 616 && (this.droite == true || this.gauche == true || this.haut == true || this.bas == true)) {
+            if (this.carte.getDecor((int) Math.round((CoordY / this.carte.getTailleTuileLargeur())), (int) Math.round((CoordX / this.carte.getTailleTuileHauteur()))) != 365 && (this.droite == true || this.gauche == true || this.haut == true || this.bas == true)) {
                 this.haut = false;
                 this.bas = false;
                 this.gauche = false;

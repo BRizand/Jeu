@@ -55,6 +55,10 @@ public class FenetreDeJeu extends JFrame implements KeyListener, ActionListener 
     private Connection connexion;
     private String Pseudos;
     private JLabel afficherPseudo;
+    private int scoreExtrait;
+    private JTextField score;
+    private int pdvExtrait;
+    private JTextField vie;
 
     public FenetreDeJeu() {
         // initialisation de la fenetre
@@ -116,6 +120,46 @@ public class FenetreDeJeu extends JFrame implements KeyListener, ActionListener 
         this.jLabel1 = new JLabel();
         this.jLabel1.setPreferredSize(new java.awt.Dimension(1000, 1000));
         this.setContentPane(this.jLabel1);
+        
+        //Extraction du score depuis la base de données
+        try {
+            Connection connexion3 = DriverManager.getConnection("jdbc:mariadb://nemrod.ens2m.fr:3306/2022-2023_s1_vs2_tp2_BateauNettoyeur", "user_bateau", "QGb4dhxBW@x.mT.I");
+            
+            PreparedStatement requete3 = connexion3.prepareStatement("SELECT Score FROM Bateau");
+            System.out.println(requete3);
+            ResultSet scoreExtrait = requete3.executeQuery();
+            requete3.close();
+            connexion3.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(scoreExtrait);
+        //Ajout du score sur le HUD
+        this.score = new JTextField(""+scoreExtrait+"");
+        score.setBounds(0,0, 150, 30);
+        score.setEditable(false);
+        score.setOpaque(false);
+        this.add(score);
+        try {
+            Connection connexion4 = DriverManager.getConnection("jdbc:mariadb://nemrod.ens2m.fr:3306/2022-2023_s1_vs2_tp2_BateauNettoyeur", "user_bateau", "QGb4dhxBW@x.mT.I");
+            
+            PreparedStatement requete4 = connexion4.prepareStatement("SELECT PointDeVie FROM Bateau");
+            System.out.println(requete4);
+            ResultSet pdvExtrait = requete4.executeQuery();
+            requete4.close();
+            connexion4.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(pdvExtrait);
+        
+        //Ajout de la vie sur le HUD
+        this.vie = new JTextField(""+pdvExtrait+"");
+        vie.setBounds(0,30, 150, 30);
+        vie.setEditable(false);
+        vie.setOpaque(false);
+        this.add(vie);
+        
         this.pack();
 
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
