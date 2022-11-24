@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import java.util.*;
+
 
 /**
  *
@@ -29,8 +31,10 @@ public class Bateau {
     private int Score;
     private boolean gauche, droite, haut, bas;
     private Carte carte;
+    private ArrayList<Integer> EAU;
 
     public Bateau(String nom, double CoordX, double CoordY, int PointDeVie, int Score) {
+        this();
         this.nom = nom;
         this.CoordX = CoordX;
         this.CoordY = CoordY;
@@ -49,6 +53,13 @@ public class Bateau {
     }
 
     public Bateau() {
+        this.EAU = new ArrayList();
+        this.EAU.add(82);
+        this.EAU.add(322);
+         this.EAU.add(360);
+          this.EAU.add(361);
+           this.EAU.add(362);
+            this.EAU.add(365);
         this.nom = "NomParDefaut";
         this.CoordX = 0;
         this.CoordY = 0;
@@ -123,7 +134,7 @@ public class Bateau {
                 CoordY = 0;
                 this.haut = false;
             }
-            if (this.carte.getDecor((int) Math.round((CoordY / this.carte.getTailleTuileLargeur())), (int) Math.round((CoordX / this.carte.getTailleTuileHauteur()))) != 616 && (this.droite == true || this.gauche == true || this.haut == true || this.bas == true)) {
+            if (EAU.contains(this.carte.getDecor((int) Math.round((CoordY / this.carte.getTailleTuileLargeur())), (int) Math.round((CoordX / this.carte.getTailleTuileHauteur())))) && (this.droite == true || this.gauche == true || this.haut == true || this.bas == true)) {
                 this.haut = false;
                 this.bas = false;
                 this.gauche = false;
@@ -134,7 +145,7 @@ public class Bateau {
         } else {
             return;
         }
-        
+
     }
 
     public void rendu(Graphics2D contexteBuffer) {
@@ -184,5 +195,5 @@ public class Bateau {
     public String toString() {
         return "Bateau{" + "nom=" + nom + ", CoordX=" + CoordX + ", CoordY=" + CoordY + ", PointDeVie=" + PointDeVie + ", Score=" + Score + '}';
     }
-    
+
 }

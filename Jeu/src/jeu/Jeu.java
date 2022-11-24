@@ -15,7 +15,9 @@ public class Jeu {
      
     public Jeu() {        
         this.carte = new Carte();
-        this.carte.ConsDecor("mer.csv");
+        this.carte.ConsDecor("Carte1.csv");
+        this.carte.ConsCalque1("Carte1C1.csv");
+        
     }
 
     public Carte getCarte() {
@@ -29,6 +31,7 @@ public class Jeu {
 
     public void rendu(Graphics2D contexte) {
         this.carte.rendu(contexte);
+        this.carte.renduCalque(contexte);
     }
-
-}
+    
+    }
